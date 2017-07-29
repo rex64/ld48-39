@@ -3,10 +3,11 @@ extends KinematicBody2D
 
 var speed = Vector2()
 var velocity = Vector2()
+var jumping = false
 
 const WALKING = false 
 const WALK_SPEED = 50
-const JUMP = 70
+const JUMP = 100
 const GRAVITY = 200
 
 signal player_move
@@ -20,8 +21,9 @@ func _process(delta):
 
 func _fixed_process(delta):
 
-	if Input.is_action_pressed("jump"):
+	if not jumping and Input.is_action_pressed("jump"):
 		velocity.y = -JUMP
+		jumping = true
 
 	velocity.y += delta * GRAVITY
 #	if (Input.is_action_pressed("ui_left")):
@@ -35,7 +37,13 @@ func _fixed_process(delta):
 	motion = move(motion)
 
 	if (is_colliding()):
+		
+		if get_collider().is_in_group('projectile'):
+			print('game over')
+			get_tree().set_pause(true)
+		
 		var n = get_collision_normal()
 		motion = n.slide(motion)
 		velocity = n.slide(velocity)
 		move(motion)
+		jumping = false

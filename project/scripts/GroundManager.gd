@@ -10,7 +10,8 @@ func _ready():
 		add_floor()
 	
 func _fixed_process(delta):
-	print(player.get_pos().x)
+#	print(player.get_pos().x)
+	pass
 #	for child_node in get_children():
 #		child_node.move(Vector2(0.2,0))
 
