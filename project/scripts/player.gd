@@ -9,6 +9,8 @@ const WALK_SPEED = 50
 const JUMP = 70
 const GRAVITY = 200
 
+signal player_move
+
 func _ready():
 	set_process(true)
 	set_fixed_process(true)
