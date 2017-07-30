@@ -12,12 +12,31 @@ const GRAVITY = 200
 
 signal player_move
 
+var whip_r = null
+
 func _ready():
 	set_process(true)
 	set_fixed_process(true)
 
 func _process(delta):
-	pass
+
+	if Input.is_action_pressed("ui_right"):
+		var floor_0 = preload("res://entities/Whip_R.tscn")
+		whip_r = floor_0.instance()
+		add_child(whip_r)
+	elif Input.is_action_pressed("ui_right"):
+		pass
+	elif Input.is_action_pressed("ui_right"):
+		pass
+	elif Input.is_action_pressed("ui_right"):
+		pass
+	else:
+		if whip_r:
+#			remove_and_delete_child(whip_r)
+#			whip_r.free()
+			whip_r.queue_free()
+			whip_r = null
+		
 
 func _fixed_process(delta):
 
